@@ -1,0 +1,35 @@
+-- CREATE DATABASE pastry;
+-- use pastry;
+-- select database();
+-- CREATE TABLE pastries
+-- 	(name VARCHAR(50),
+--      quantity int
+--      );
+-- SHOW TABLES;
+-- DESC pastries; 
+-- DROP TABLE pastries;
+-- DROP DATABASE pastry;
+-- CREATE DATABASE cat;
+-- use cat;
+-- CREATE TABLE cats
+-- 	(
+--     name VARCHAR(15),
+-- 	age INT
+--     );
+-- INSERT INTO cats(name,age)
+-- VALUES ( 'joy' , 5);
+-- INSERT INTO cats(name,age)
+-- VALUES ('vikky' ,10);
+-- show tables;
+-- DESC cats;
+-- create database vamsi;
+-- use vamsi;
+-- select database();
+-- create table friends
+-- (name VARCHAR(15) , age INT);
+-- DESC friends;
+-- INSERT INTO friends(name,age) VALUES('rajaneesh',18);
+--  INSERT INTO friends(name,age) VALUES('Dhanesh',18);
+--  SELECT * FROM friends;
+-- Drop TABLE friends;
+-- DROP DATABASE vamsi;
