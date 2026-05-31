@@ -1,0 +1,28 @@
+-- create database vamsi;
+-- use vamsi;
+-- select database();
+-- create table friends
+-- (name VARCHAR(15) , age INT);
+-- DESC friends;
+-- INSERT INTO friends(name,age) VALUES('rajaneesh',18);
+--  INSERT INTO friends(name,age) VALUES('Dhanesh',18);
+--  SELECT * FROM friends;
+-- Drop TABLE friends;
+-- DROP DATABASE vamsi;
+-- CREATE TABLE unique_cats (
+-- 	cat_id INT PRIMARY KEY,
+--     name VARCHAR(100) NOT NULL,
+--     age INT NOT NULL
+-- );
+-- INSERT INTO unique_cats(cat_id,name,age) VALUES(2,'Dhanesh',18);
+-- select * from unique_cats;
+-- CREATE TABLE unique_cats3 (
+--     cat_id INT AUTO_INCREMENT,
+--     name VARCHAR(100) NOT NULL,
+--     age INT NOT NULL,
+--     PRIMARY KEY (cat_id)
+-- );
+-- INSERT INTO unique_cats3(name,age) VALUES('Dhanesh',18);
+-- INSERT INTO unique_cats3(name,age) VALUES('Dhaneshs',18);
+-- select * from unique_cats3;
+-- DESC unique_cats3;
