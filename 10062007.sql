@@ -1218,5 +1218,358 @@ mysql>
 +----------------------+--------+-----------------+
 47 rows in set (0.000 sec)
 
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| movie_ratings      |
+| mysql              |
+| performance_schema |
+| shop               |
+| sys                |
++--------------------+
+6 rows in set (0.008 sec)
+
+mysql> use movie_ratings;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> SELECT 
+    ->     title, released_year, genre, rating, first_name, last_name
+    -> FROM
+    ->     reviews
+    ->         JOIN
+    ->     series ON series.id = reviews.series_id
+    ->         JOIN
+    ->     reviewers ON reviewers.id = reviews.reviewer_id;
++----------------------+---------------+-----------+--------+------------+-----------+
+| title                | released_year | genre     | rating | first_name | last_name |
++----------------------+---------------+-----------+--------+------------+-----------+
+| Archer               |          2009 | Animation |    8.0 | Thomas     | Stoneman  |
+| Arrested Development |          2003 | Comedy    |    8.1 | Thomas     | Stoneman  |
+| Bob's Burgers        |          2011 | Animation |    7.0 | Thomas     | Stoneman  |
+| Bojack Horseman      |          2014 | Animation |    7.5 | Thomas     | Stoneman  |
+| Breaking Bad         |          2008 | Drama     |    9.5 | Thomas     | Stoneman  |
+| Archer               |          2009 | Animation |    7.5 | Wyatt      | Skaggs    |
+| Bojack Horseman      |          2014 | Animation |    7.6 | Wyatt      | Skaggs    |
+| Breaking Bad         |          2008 | Drama     |    9.3 | Wyatt      | Skaggs    |
+| Curb Your Enthusiasm |          2000 | Comedy    |    6.5 | Wyatt      | Skaggs    |
+| Curb Your Enthusiasm |          2000 | Comedy    |    8.4 | Wyatt      | Skaggs    |
+| Fargo                |          2014 | Drama     |    9.1 | Wyatt      | Skaggs    |
+| Freaks and Geeks     |          1999 | Comedy    |    7.8 | Wyatt      | Skaggs    |
+| General Hospital     |          1963 | Drama     |    5.5 | Wyatt      | Skaggs    |
+| Stranger Things      |          2016 | Drama     |    8.5 | Wyatt      | Skaggs    |
+| Archer               |          2009 | Animation |    8.5 | Kimbra     | Masters   |
+| Arrested Development |          2003 | Comedy    |    8.0 | Kimbra     | Masters   |
+| Bob's Burgers        |          2011 | Animation |    7.1 | Kimbra     | Masters   |
+| Bojack Horseman      |          2014 | Animation |    7.8 | Kimbra     | Masters   |
+| Breaking Bad         |          2008 | Drama     |    9.0 | Kimbra     | Masters   |
+| Curb Your Enthusiasm |          2000 | Comedy    |    7.8 | Kimbra     | Masters   |
+| General Hospital     |          1963 | Drama     |    6.8 | Kimbra     | Masters   |
+| Seinfeld             |          1989 | Comedy    |    8.0 | Kimbra     | Masters   |
+| Stranger Things      |          2016 | Drama     |    8.9 | Kimbra     | Masters   |
+| Archer               |          2009 | Animation |    7.7 | Domingo    | Cortes    |
+| Arrested Development |          2003 | Comedy    |    6.0 | Domingo    | Cortes    |
+| Bob's Burgers        |          2011 | Animation |    8.0 | Domingo    | Cortes    |
+| Bojack Horseman      |          2014 | Animation |    8.3 | Domingo    | Cortes    |
+| Breaking Bad         |          2008 | Drama     |    9.1 | Domingo    | Cortes    |
+| Curb Your Enthusiasm |          2000 | Comedy    |    8.8 | Domingo    | Cortes    |
+| Freaks and Geeks     |          1999 | Comedy    |    8.5 | Domingo    | Cortes    |
+| General Hospital     |          1963 | Drama     |    5.8 | Domingo    | Cortes    |
+| Seinfeld             |          1989 | Comedy    |    7.2 | Domingo    | Cortes    |
+| Stranger Things      |          2016 | Drama     |    8.9 | Domingo    | Cortes    |
+| Archer               |          2009 | Animation |    8.9 | Colt       | Steele    |
+| Arrested Development |          2003 | Comedy    |    9.9 | Colt       | Steele    |
+| Bob's Burgers        |          2011 | Animation |    8.0 | Colt       | Steele    |
+| Bojack Horseman      |          2014 | Animation |    8.5 | Colt       | Steele    |
+| Breaking Bad         |          2008 | Drama     |    9.9 | Colt       | Steele    |
+| Curb Your Enthusiasm |          2000 | Comedy    |    9.1 | Colt       | Steele    |
+| Fargo                |          2014 | Drama     |    9.7 | Colt       | Steele    |
+| Freaks and Geeks     |          1999 | Comedy    |    9.3 | Colt       | Steele    |
+| General Hospital     |          1963 | Drama     |    4.5 | Colt       | Steele    |
+| Halt and Catch Fire  |          2014 | Drama     |    9.9 | Colt       | Steele    |
+| Arrested Development |          2003 | Comedy    |    8.4 | Pinkie     | Petit     |
+| Bob's Burgers        |          2011 | Animation |    7.5 | Pinkie     | Petit     |
+| Freaks and Geeks     |          1999 | Comedy    |    8.8 | Pinkie     | Petit     |
+| General Hospital     |          1963 | Drama     |    4.3 | Pinkie     | Petit     |
++----------------------+---------------+-----------+--------+------------+-----------+
+47 rows in set (0.001 sec)
+
+mysql>  
+    -> 
+    -> CREATE VIEW full_reviews AS
+    -> SELECT title, released_year, genre, rating, first_name, last_name FROM reviews
+    -> JOIN series ON series.id = reviews.series_id
+    -> JOIN reviewers ON reviewers.id = reviews.reviewer_id;
+Query OK, 0 rows affected (0.004 sec)
+
+mysql>  
+    -> SELECT * FROM full_reviews;
++----------------------+---------------+-----------+--------+------------+-----------+
+| title                | released_year | genre     | rating | first_name | last_name |
++----------------------+---------------+-----------+--------+------------+-----------+
+| Archer               |          2009 | Animation |    8.0 | Thomas     | Stoneman  |
+| Arrested Development |          2003 | Comedy    |    8.1 | Thomas     | Stoneman  |
+| Bob's Burgers        |          2011 | Animation |    7.0 | Thomas     | Stoneman  |
+| Bojack Horseman      |          2014 | Animation |    7.5 | Thomas     | Stoneman  |
+| Breaking Bad         |          2008 | Drama     |    9.5 | Thomas     | Stoneman  |
+| Archer               |          2009 | Animation |    7.5 | Wyatt      | Skaggs    |
+| Bojack Horseman      |          2014 | Animation |    7.6 | Wyatt      | Skaggs    |
+| Breaking Bad         |          2008 | Drama     |    9.3 | Wyatt      | Skaggs    |
+| Curb Your Enthusiasm |          2000 | Comedy    |    6.5 | Wyatt      | Skaggs    |
+| Curb Your Enthusiasm |          2000 | Comedy    |    8.4 | Wyatt      | Skaggs    |
+| Fargo                |          2014 | Drama     |    9.1 | Wyatt      | Skaggs    |
+| Freaks and Geeks     |          1999 | Comedy    |    7.8 | Wyatt      | Skaggs    |
+| General Hospital     |          1963 | Drama     |    5.5 | Wyatt      | Skaggs    |
+| Stranger Things      |          2016 | Drama     |    8.5 | Wyatt      | Skaggs    |
+| Archer               |          2009 | Animation |    8.5 | Kimbra     | Masters   |
+| Arrested Development |          2003 | Comedy    |    8.0 | Kimbra     | Masters   |
+| Bob's Burgers        |          2011 | Animation |    7.1 | Kimbra     | Masters   |
+| Bojack Horseman      |          2014 | Animation |    7.8 | Kimbra     | Masters   |
+| Breaking Bad         |          2008 | Drama     |    9.0 | Kimbra     | Masters   |
+| Curb Your Enthusiasm |          2000 | Comedy    |    7.8 | Kimbra     | Masters   |
+| General Hospital     |          1963 | Drama     |    6.8 | Kimbra     | Masters   |
+| Seinfeld             |          1989 | Comedy    |    8.0 | Kimbra     | Masters   |
+| Stranger Things      |          2016 | Drama     |    8.9 | Kimbra     | Masters   |
+| Archer               |          2009 | Animation |    7.7 | Domingo    | Cortes    |
+| Arrested Development |          2003 | Comedy    |    6.0 | Domingo    | Cortes    |
+| Bob's Burgers        |          2011 | Animation |    8.0 | Domingo    | Cortes    |
+| Bojack Horseman      |          2014 | Animation |    8.3 | Domingo    | Cortes    |
+| Breaking Bad         |          2008 | Drama     |    9.1 | Domingo    | Cortes    |
+| Curb Your Enthusiasm |          2000 | Comedy    |    8.8 | Domingo    | Cortes    |
+| Freaks and Geeks     |          1999 | Comedy    |    8.5 | Domingo    | Cortes    |
+| General Hospital     |          1963 | Drama     |    5.8 | Domingo    | Cortes    |
+| Seinfeld             |          1989 | Comedy    |    7.2 | Domingo    | Cortes    |
+| Stranger Things      |          2016 | Drama     |    8.9 | Domingo    | Cortes    |
+| Archer               |          2009 | Animation |    8.9 | Colt       | Steele    |
+| Arrested Development |          2003 | Comedy    |    9.9 | Colt       | Steele    |
+| Bob's Burgers        |          2011 | Animation |    8.0 | Colt       | Steele    |
+| Bojack Horseman      |          2014 | Animation |    8.5 | Colt       | Steele    |
+| Breaking Bad         |          2008 | Drama     |    9.9 | Colt       | Steele    |
+| Curb Your Enthusiasm |          2000 | Comedy    |    9.1 | Colt       | Steele    |
+| Fargo                |          2014 | Drama     |    9.7 | Colt       | Steele    |
+| Freaks and Geeks     |          1999 | Comedy    |    9.3 | Colt       | Steele    |
+| General Hospital     |          1963 | Drama     |    4.5 | Colt       | Steele    |
+| Halt and Catch Fire  |          2014 | Drama     |    9.9 | Colt       | Steele    |
+| Arrested Development |          2003 | Comedy    |    8.4 | Pinkie     | Petit     |
+| Bob's Burgers        |          2011 | Animation |    7.5 | Pinkie     | Petit     |
+| Freaks and Geeks     |          1999 | Comedy    |    8.8 | Pinkie     | Petit     |
+| General Hospital     |          1963 | Drama     |    4.3 | Pinkie     | Petit     |
++----------------------+---------------+-----------+--------+------------+-----------+
+47 rows in set (0.001 sec)
+
 mysql> 
-mysql> 
+mysql>   SELECT * FROM full_reviews wheregenre = 'animation';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '= 'animation'' at line 1
+mysql>   SELECT * FROM full_reviews wheregenre =like 'animation';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=like 'animation'' at line 1
+mysql>   SELECT * FROM full_reviews wheregenre =like 'Animation';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=like 'Animation'' at line 1
+mysql>   SELECT * FROM full_reviews wheregenre = 'Animation';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '= 'Animation'' at line 1
+mysql>   SELECT * FROM full_reviews where genre = 'Animation';
++-----------------+---------------+-----------+--------+------------+-----------+
+| title           | released_year | genre     | rating | first_name | last_name |
++-----------------+---------------+-----------+--------+------------+-----------+
+| Archer          |          2009 | Animation |    8.0 | Thomas     | Stoneman  |
+| Archer          |          2009 | Animation |    7.5 | Wyatt      | Skaggs    |
+| Archer          |          2009 | Animation |    8.5 | Kimbra     | Masters   |
+| Archer          |          2009 | Animation |    7.7 | Domingo    | Cortes    |
+| Archer          |          2009 | Animation |    8.9 | Colt       | Steele    |
+| Bob's Burgers   |          2011 | Animation |    7.0 | Thomas     | Stoneman  |
+| Bob's Burgers   |          2011 | Animation |    7.5 | Pinkie     | Petit     |
+| Bob's Burgers   |          2011 | Animation |    8.0 | Domingo    | Cortes    |
+| Bob's Burgers   |          2011 | Animation |    7.1 | Kimbra     | Masters   |
+| Bob's Burgers   |          2011 | Animation |    8.0 | Colt       | Steele    |
+| Bojack Horseman |          2014 | Animation |    7.5 | Thomas     | Stoneman  |
+| Bojack Horseman |          2014 | Animation |    7.8 | Kimbra     | Masters   |
+| Bojack Horseman |          2014 | Animation |    8.3 | Domingo    | Cortes    |
+| Bojack Horseman |          2014 | Animation |    7.6 | Wyatt      | Skaggs    |
+| Bojack Horseman |          2014 | Animation |    8.5 | Colt       | Steele    |
++-----------------+---------------+-----------+--------+------------+-----------+
+15 rows in set (0.001 sec)
+
+mysql>   SELECT * FROM full_reviews where genre = 'animation';
++-----------------+---------------+-----------+--------+------------+-----------+
+| title           | released_year | genre     | rating | first_name | last_name |
++-----------------+---------------+-----------+--------+------------+-----------+
+| Archer          |          2009 | Animation |    8.0 | Thomas     | Stoneman  |
+| Archer          |          2009 | Animation |    7.5 | Wyatt      | Skaggs    |
+| Archer          |          2009 | Animation |    8.5 | Kimbra     | Masters   |
+| Archer          |          2009 | Animation |    7.7 | Domingo    | Cortes    |
+| Archer          |          2009 | Animation |    8.9 | Colt       | Steele    |
+| Bob's Burgers   |          2011 | Animation |    7.0 | Thomas     | Stoneman  |
+| Bob's Burgers   |          2011 | Animation |    7.5 | Pinkie     | Petit     |
+| Bob's Burgers   |          2011 | Animation |    8.0 | Domingo    | Cortes    |
+| Bob's Burgers   |          2011 | Animation |    7.1 | Kimbra     | Masters   |
+| Bob's Burgers   |          2011 | Animation |    8.0 | Colt       | Steele    |
+| Bojack Horseman |          2014 | Animation |    7.5 | Thomas     | Stoneman  |
+| Bojack Horseman |          2014 | Animation |    7.8 | Kimbra     | Masters   |
+| Bojack Horseman |          2014 | Animation |    8.3 | Domingo    | Cortes    |
+| Bojack Horseman |          2014 | Animation |    7.6 | Wyatt      | Skaggs    |
+| Bojack Horseman |          2014 | Animation |    8.5 | Colt       | Steele    |
++-----------------+---------------+-----------+--------+------------+-----------+
+15 rows in set (0.001 sec)
+
+mysql> show tables;
++-------------------------+
+| Tables_in_movie_ratings |
++-------------------------+
+| full_reviews            |
+| reviewers               |
+| reviews                 |
+| series                  |
++-------------------------+
+4 rows in set (0.002 sec)
+
+mysql> -- full reviews are there
+Query OK, 0 rows affected (0.000 sec)
+
+mysql> exit
+Bye
+vamsi@vamsis-MacBook-Air ~ % mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 9.7.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use movie_ratings
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++-------------------------+
+| Tables_in_movie_ratings |
++-------------------------+
+| full_reviews            |
+| reviewers               |
+| reviews                 |
+| series                  |
++-------------------------+
+4 rows in set (0.002 sec)
+
+mysql> select * from full_reviews;
++----------------------+---------------+-----------+--------+------------+-----------+
+| title                | released_year | genre     | rating | first_name | last_name |
++----------------------+---------------+-----------+--------+------------+-----------+
+| Archer               |          2009 | Animation |    8.0 | Thomas     | Stoneman  |
+| Arrested Development |          2003 | Comedy    |    8.1 | Thomas     | Stoneman  |
+| Bob's Burgers        |          2011 | Animation |    7.0 | Thomas     | Stoneman  |
+| Bojack Horseman      |          2014 | Animation |    7.5 | Thomas     | Stoneman  |
+| Breaking Bad         |          2008 | Drama     |    9.5 | Thomas     | Stoneman  |
+| Archer               |          2009 | Animation |    7.5 | Wyatt      | Skaggs    |
+| Bojack Horseman      |          2014 | Animation |    7.6 | Wyatt      | Skaggs    |
+| Breaking Bad         |          2008 | Drama     |    9.3 | Wyatt      | Skaggs    |
+| Curb Your Enthusiasm |          2000 | Comedy    |    6.5 | Wyatt      | Skaggs    |
+| Curb Your Enthusiasm |          2000 | Comedy    |    8.4 | Wyatt      | Skaggs    |
+| Fargo                |          2014 | Drama     |    9.1 | Wyatt      | Skaggs    |
+| Freaks and Geeks     |          1999 | Comedy    |    7.8 | Wyatt      | Skaggs    |
+| General Hospital     |          1963 | Drama     |    5.5 | Wyatt      | Skaggs    |
+| Stranger Things      |          2016 | Drama     |    8.5 | Wyatt      | Skaggs    |
+| Archer               |          2009 | Animation |    8.5 | Kimbra     | Masters   |
+| Arrested Development |          2003 | Comedy    |    8.0 | Kimbra     | Masters   |
+| Bob's Burgers        |          2011 | Animation |    7.1 | Kimbra     | Masters   |
+| Bojack Horseman      |          2014 | Animation |    7.8 | Kimbra     | Masters   |
+| Breaking Bad         |          2008 | Drama     |    9.0 | Kimbra     | Masters   |
+| Curb Your Enthusiasm |          2000 | Comedy    |    7.8 | Kimbra     | Masters   |
+| General Hospital     |          1963 | Drama     |    6.8 | Kimbra     | Masters   |
+| Seinfeld             |          1989 | Comedy    |    8.0 | Kimbra     | Masters   |
+| Stranger Things      |          2016 | Drama     |    8.9 | Kimbra     | Masters   |
+| Archer               |          2009 | Animation |    7.7 | Domingo    | Cortes    |
+| Arrested Development |          2003 | Comedy    |    6.0 | Domingo    | Cortes    |
+| Bob's Burgers        |          2011 | Animation |    8.0 | Domingo    | Cortes    |
+| Bojack Horseman      |          2014 | Animation |    8.3 | Domingo    | Cortes    |
+| Breaking Bad         |          2008 | Drama     |    9.1 | Domingo    | Cortes    |
+| Curb Your Enthusiasm |          2000 | Comedy    |    8.8 | Domingo    | Cortes    |
+| Freaks and Geeks     |          1999 | Comedy    |    8.5 | Domingo    | Cortes    |
+| General Hospital     |          1963 | Drama     |    5.8 | Domingo    | Cortes    |
+| Seinfeld             |          1989 | Comedy    |    7.2 | Domingo    | Cortes    |
+| Stranger Things      |          2016 | Drama     |    8.9 | Domingo    | Cortes    |
+| Archer               |          2009 | Animation |    8.9 | Colt       | Steele    |
+| Arrested Development |          2003 | Comedy    |    9.9 | Colt       | Steele    |
+| Bob's Burgers        |          2011 | Animation |    8.0 | Colt       | Steele    |
+| Bojack Horseman      |          2014 | Animation |    8.5 | Colt       | Steele    |
+| Breaking Bad         |          2008 | Drama     |    9.9 | Colt       | Steele    |
+| Curb Your Enthusiasm |          2000 | Comedy    |    9.1 | Colt       | Steele    |
+| Fargo                |          2014 | Drama     |    9.7 | Colt       | Steele    |
+| Freaks and Geeks     |          1999 | Comedy    |    9.3 | Colt       | Steele    |
+| General Hospital     |          1963 | Drama     |    4.5 | Colt       | Steele    |
+| Halt and Catch Fire  |          2014 | Drama     |    9.9 | Colt       | Steele    |
+| Arrested Development |          2003 | Comedy    |    8.4 | Pinkie     | Petit     |
+| Bob's Burgers        |          2011 | Animation |    7.5 | Pinkie     | Petit     |
+| Freaks and Geeks     |          1999 | Comedy    |    8.8 | Pinkie     | Petit     |
+| General Hospital     |          1963 | Drama     |    4.3 | Pinkie     | Petit     |
++----------------------+---------------+-----------+--------+------------+-----------+
+47 rows in set (0.001 sec)
+
+mysql> drop full_reviews;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'full_reviews' at line 1
+mysql> drop table full_reviews;
+ERROR 1051 (42S02): Unknown table 'movie_ratings.full_reviews'
+mysql> drop table full_reviews;
+ERROR 1051 (42S02): Unknown table 'movie_ratings.full_reviews'
+mysql> SELECT * FROM full_reviews;
++----------------------+---------------+-----------+--------+------------+-----------+
+| title                | released_year | genre     | rating | first_name | last_name |
++----------------------+---------------+-----------+--------+------------+-----------+
+| Archer               |          2009 | Animation |    8.0 | Thomas     | Stoneman  |
+| Arrested Development |          2003 | Comedy    |    8.1 | Thomas     | Stoneman  |
+| Bob's Burgers        |          2011 | Animation |    7.0 | Thomas     | Stoneman  |
+| Bojack Horseman      |          2014 | Animation |    7.5 | Thomas     | Stoneman  |
+| Breaking Bad         |          2008 | Drama     |    9.5 | Thomas     | Stoneman  |
+| Archer               |          2009 | Animation |    7.5 | Wyatt      | Skaggs    |
+| Bojack Horseman      |          2014 | Animation |    7.6 | Wyatt      | Skaggs    |
+| Breaking Bad         |          2008 | Drama     |    9.3 | Wyatt      | Skaggs    |
+| Curb Your Enthusiasm |          2000 | Comedy    |    6.5 | Wyatt      | Skaggs    |
+| Curb Your Enthusiasm |          2000 | Comedy    |    8.4 | Wyatt      | Skaggs    |
+| Fargo                |          2014 | Drama     |    9.1 | Wyatt      | Skaggs    |
+| Freaks and Geeks     |          1999 | Comedy    |    7.8 | Wyatt      | Skaggs    |
+| General Hospital     |          1963 | Drama     |    5.5 | Wyatt      | Skaggs    |
+| Stranger Things      |          2016 | Drama     |    8.5 | Wyatt      | Skaggs    |
+| Archer               |          2009 | Animation |    8.5 | Kimbra     | Masters   |
+| Arrested Development |          2003 | Comedy    |    8.0 | Kimbra     | Masters   |
+| Bob's Burgers        |          2011 | Animation |    7.1 | Kimbra     | Masters   |
+| Bojack Horseman      |          2014 | Animation |    7.8 | Kimbra     | Masters   |
+| Breaking Bad         |          2008 | Drama     |    9.0 | Kimbra     | Masters   |
+| Curb Your Enthusiasm |          2000 | Comedy    |    7.8 | Kimbra     | Masters   |
+| General Hospital     |          1963 | Drama     |    6.8 | Kimbra     | Masters   |
+| Seinfeld             |          1989 | Comedy    |    8.0 | Kimbra     | Masters   |
+| Stranger Things      |          2016 | Drama     |    8.9 | Kimbra     | Masters   |
+| Archer               |          2009 | Animation |    7.7 | Domingo    | Cortes    |
+| Arrested Development |          2003 | Comedy    |    6.0 | Domingo    | Cortes    |
+| Bob's Burgers        |          2011 | Animation |    8.0 | Domingo    | Cortes    |
+| Bojack Horseman      |          2014 | Animation |    8.3 | Domingo    | Cortes    |
+| Breaking Bad         |          2008 | Drama     |    9.1 | Domingo    | Cortes    |
+| Curb Your Enthusiasm |          2000 | Comedy    |    8.8 | Domingo    | Cortes    |
+| Freaks and Geeks     |          1999 | Comedy    |    8.5 | Domingo    | Cortes    |
+| General Hospital     |          1963 | Drama     |    5.8 | Domingo    | Cortes    |
+| Seinfeld             |          1989 | Comedy    |    7.2 | Domingo    | Cortes    |
+| Stranger Things      |          2016 | Drama     |    8.9 | Domingo    | Cortes    |
+| Archer               |          2009 | Animation |    8.9 | Colt       | Steele    |
+| Arrested Development |          2003 | Comedy    |    9.9 | Colt       | Steele    |
+| Bob's Burgers        |          2011 | Animation |    8.0 | Colt       | Steele    |
+| Bojack Horseman      |          2014 | Animation |    8.5 | Colt       | Steele    |
+| Breaking Bad         |          2008 | Drama     |    9.9 | Colt       | Steele    |
+| Curb Your Enthusiasm |          2000 | Comedy    |    9.1 | Colt       | Steele    |
+| Fargo                |          2014 | Drama     |    9.7 | Colt       | Steele    |
+| Freaks and Geeks     |          1999 | Comedy    |    9.3 | Colt       | Steele    |
+| General Hospital     |          1963 | Drama     |    4.5 | Colt       | Steele    |
+| Halt and Catch Fire  |          2014 | Drama     |    9.9 | Colt       | Steele    |
+| Arrested Development |          2003 | Comedy    |    8.4 | Pinkie     | Petit     |
+| Bob's Burgers        |          2011 | Animation |    7.5 | Pinkie     | Petit     |
+| Freaks and Geeks     |          1999 | Comedy    |    8.8 | Pinkie     | Petit     |
+| General Hospital     |          1963 | Drama     |    4.3 | Pinkie     | Petit     |
++----------------------+---------------+-----------+--------+------------+-----------+
+47 rows in set (0.001 sec)
+
